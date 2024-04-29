@@ -114,10 +114,10 @@
                 <div class="name">Stuur:</div><div> {{ stage.cox }} </div>
             </div>
             <div class="bow">
-                <div class="name">Slag:</div><div> {{ stage.bow }} </div>
+                <div class="name">Slag:</div><div> {{ stage.stroke }} </div>
             </div>
             <div class="stroke">
-                <div class="name">Boeg:</div><div> {{ stage.stroke }} </div>
+                <div class="name">Boeg:</div><div> {{ stage.bow }} </div>
             </div>
         </div>
 
@@ -127,10 +127,10 @@
                 <div class="name">Stuur:</div><div> {{ stage.next_cox }} </div>
             </div>
             <div class="bow">
-                <div class="name">Slag:</div><div> {{ stage.next_bow }} </div>
+                <div class="name">Slag:</div><div> {{ stage.next_stroke }} </div>
             </div>
             <div class="stroke">
-                <div class="name">Boeg:</div><div> {{ stage.next_stroke }} </div>
+                <div class="name">Boeg:</div><div> {{ stage.next_bow }} </div>
             </div>
         </div>
 
@@ -139,19 +139,13 @@
             <div class="countdown" id="countdown"></div>
         </div>
 
-
-
-
-
-
-
     </div>
 
     <script>
 
 
-        // Set the date and time for May 10th, 2024, 20:00:00
-        var countDownDate = new Date("May 10, 2024 20:00:00").getTime();
+        // Set the date and time for May 11th, 2024, 20:00:00
+        var countDownDate = new Date("May 11, 2024 20:00:00").getTime();
 
         // Update the countdown every second
         var x = setInterval(function() {
