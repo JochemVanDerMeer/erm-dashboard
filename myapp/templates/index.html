@@ -104,7 +104,7 @@
         <h1 class="stage">Boegballen ERM dashboard</h1>
         
         <div class="stage-info">
-            <p><b>Huidige etappe:</b> {{ stage.stage_number }}. {{ stage.start }} - {{ stage.finish }}</p>
+            <p><b>Huidige etappe:</b> {{ stage.stage_number }}. {{ stage.start }} -> {{ stage.finish }}</p>
             <p><b>Afstand etappe:</b> {{ stage.distance }} meter</p>
         </div>
 
@@ -121,7 +121,7 @@
             </div>
         </div>
 
-        <div>Volgende:</div>
+        <div>Volgende etappe:</div>
         <div class="crew">
             <div class="cox">
                 <div class="name">Stuur:</div><div> {{ stage.next_cox }} </div>
