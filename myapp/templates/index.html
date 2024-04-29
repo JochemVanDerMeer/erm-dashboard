@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rowing Match</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .stage {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .crew {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .cox, .bow, .stroke {
+            flex: 1;
+            text-align: center;
+        }
+        .name {
+            margin-top: 5px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+            text-transform: uppercase;
+        }
+        .stage-info {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #666;
+        }
+        .deadline {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #666;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .countdown-container {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #666;
+        }
+        .countdown-text {
+            display: inline-block;
+        }
+        .countdown {
+            display: inline-block;
+        }
+        .image-container {
+            text-align: center; /* Center-align the content */
+        }
+        img {
+            width: 100px; /* Set width to 200 pixels */
+            height: auto; /* Maintain aspect ratio */
+            display: inline-block; /* Ensure the image behaves like an inline element */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img class=logo src="https://boegballen.nl/img/logobb.jpg" alt="Description of the image">
+        </div>
+        <h1 class="stage">Boegballen ERM dashboard</h1>
+        
+        <div class="stage-info">
+            <p><b>Huidige etappe:</b> {{ stage.stage_number }}. {{ stage.start }} - {{ stage.finish }}</p>
+            <p><b>Afstand etappe:</b> {{ stage.distance }} meter</p>
+        </div>
+
+        <div>Nu bezig:</div>
+        <div class="crew">
+            <div class="cox">
+                <div class="name">Stuur:</div><div> {{ stage.cox }} </div>
+            </div>
+            <div class="bow">
+                <div class="name">Slag:</div><div> {{ stage.bow }} </div>
+            </div>
+            <div class="stroke">
+                <div class="name">Boeg:</div><div> {{ stage.stroke }} </div>
+            </div>
+        </div>
+
+        <div>Volgende:</div>
+        <div class="crew">
+            <div class="cox">
+                <div class="name">Stuur:</div><div> {{ stage.next_cox }} </div>
+            </div>
+            <div class="bow">
+                <div class="name">Slag:</div><div> {{ stage.next_bow }} </div>
+            </div>
+            <div class="stroke">
+                <div class="name">Boeg:</div><div> {{ stage.next_stroke }} </div>
+            </div>
+        </div>
+
+        <div class="countdown-container">
+            <div class="countdown-text"><b>Tijd over:</b></div>
+            <div class="countdown" id="countdown"></div>
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+    <script>
+
+
+        // Set the date and time for May 10th, 2024, 20:00:00
+        var countDownDate = new Date("May 10, 2024 20:00:00").getTime();
+
+        // Update the countdown every second
+        var x = setInterval(function() {
+            // Get the current date and time
+            var now = new Date().getTime();
+
+            // Calculate the distance between now and the countdown date
+            var distance = countDownDate - now;
+
+            // Calculate days, hours, minutes, and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the countdown
+            document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            // If the countdown is over, display a message
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
