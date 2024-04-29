@@ -49,9 +49,9 @@ def index():
     users_list_html = [f"<li>{ user.stage_number }</li>" for user in users]
     return f"<ul>{''.join(users_list_html)}</ul>"
 
-@main.route('/add/<stage_number>/<start>/<finish>/<distance>/<cox>/<bow>/<stroke>/<next_cox>/<next_bow>/<next_stroke>')
-def add_stage(stage_number, start, finish, distance, cox, bow, stroke, next_cox, next_bow, next_stroke):
-    db.session.add(RowStage(stage_number=stage_number, start=start, finish=finish, distance=distance, cox=cox, bow=bow, stroke=stroke, next_cox=next_cox, next_bow=next_bow, next_stroke=next_stroke))
+@main.route('/add/<stage_number>/<start>/<finish>/<distance>/<cox>/<stroke>/<bow>/<next_cox>/<next_stroke>/<next_box>')
+def add_stage(stage_number, start, finish, distance, cox, stroke, bow, next_cox, next_stroke, next_bow):
+    db.session.add(RowStage(stage_number=stage_number, start=start, finish=finish, distance=distance, cox=cox, stroke=stroke, bow=bow, next_cox=next_cox, next_stroke=next_stroke, next_bow=next_bow,))
     db.session.commit()
     return redirect(url_for("main.index"))
 
