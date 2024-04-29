@@ -94,6 +94,19 @@
             height: auto; /* Maintain aspect ratio */
             display: inline-block; /* Ensure the image behaves like an inline element */
         }
+        .progress-container {
+        width: 100%;
+        background-color: #d7d7d7;
+        }
+
+        .progress-bar {
+        width: 0;
+        height: 30px;
+        background-color: #4caf50;
+        text-align: center;
+        line-height: 30px;
+        color: white;
+}
     </style>
 </head>
 <body>
@@ -139,10 +152,96 @@
             <div class="countdown" id="countdown"></div>
         </div>
 
+        <div class="countdown-container">
+            <div class="countdown-text"><b>Afstand geroeid:</b></div>
+            <div class="countdown" id="distance_covered"> </div>
+        </div>
+
+        <div class="countdown-container">
+            <div class="countdown-text"><b>Afstand te gaan:</b></div>
+            <div class="countdown" id="distance_todo"> </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+          </div>
+
     </div>
 
     <script>
 
+        var distances = [0, 12800, 11000, 10900, 12550, 12500, 7500, 9700, 11200, 11350, 11100, 8000, 8300, 10125, 11700, 10500, 8400, 9100, 10000, 10000, 8500]
+        var current_distance = 0
+        var current_stage = parseInt("{{stage.stage_number}}")
+        console.log(current_stage)
+        if ((current_stage) == 0) {
+            current_distance = distances[0]
+        }
+        else if ((current_stage) == 1) {
+            current_distance = distances[0]
+        }
+        else if ((current_stage == 2)) {
+            current_distance= distances.slice(0, 1).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 3)) {
+            current_distance = distances.slice(0, 2).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 4)) {
+            current_distance = distances.slice(0, 3).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 5)) {
+            current_distance = distances.slice(0, 4).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 6)) {
+            current_distance = distances.slice(0, 5).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 7)) {
+            current_distance = distances.slice(0, 6).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 8)) {
+            current_distance = distances.slice(0, 7).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 9)) {
+            current_distance = distances.slice(0, 8).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 10)) {
+            current_distance = distances.slice(0, 9).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 11)) {
+            current_distance = distances.slice(0, 10).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 12)) {
+            current_distance = distances.slice(0, 11).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 13)) {
+            current_distance = distances.slice(0, 12).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 14)) {
+            current_distance = distances.slice(0, 13).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 15)) {
+            current_distance = distances.slice(0, 14).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 16)) {
+            current_distance = distances.slice(0, 15).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 17)) {
+            current_distance = distances.slice(0, 16).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 18)) {
+            current_distance = distances.slice(0, 17).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 19)) {
+            current_distance = distances.slice(0, 18).reduce((acc, current) => acc + current, 0);
+        }
+        else if ((current_stage == 20)) {
+            current_distance = distances.slice(0, 19).reduce((acc, current) => acc + current, 0);
+        }
+        
+        document.getElementById("distance_covered").innerHTML = current_distance/1000 + " km"
+        document.getElementById("distance_todo").innerHTML = 205 - (current_distance/1000) + " km"
+
+        var percentage = ((current_distance/1000) / 205.23) * 100
 
         // Set the date and time for May 11th, 2024, 20:00:00
         var countDownDate = new Date("May 11, 2024 20:00:00").getTime();
@@ -162,7 +261,8 @@
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             // Display the countdown
-            document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            // document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            document.getElementById("countdown").innerHTML = days + "d " + hours + "u " + minutes + "m ";
 
             // If the countdown is over, display a message
             if (distance < 0) {
@@ -170,6 +270,15 @@
                 document.getElementById("countdown").innerHTML = "EXPIRED";
             }
         }, 1000);
+
+        window.onload = function() {
+        var elem = document.getElementById("myBar");
+        if (percentage >= 0 && percentage <= 100) {
+            elem.style.width = percentage + "%";
+        } else {
+            elem.style.width = "0%";
+        }
+        };
     </script>
 </body>
 </html>
