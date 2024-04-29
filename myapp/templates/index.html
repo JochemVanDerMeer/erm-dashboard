@@ -173,7 +173,7 @@
         var distances = [0, 12800, 11000, 10900, 12550, 12500, 7500, 9700, 11200, 11350, 11100, 8000, 8300, 10125, 11700, 10500, 8400, 9100, 10000, 10000, 8500]
         var current_distance = 0
         var current_stage = parseInt("{{stage.stage_number}}")
-        console.log(current_stage)
+
         if ((current_stage) == 0) {
             current_distance = distances[0]
         }
@@ -238,8 +238,8 @@
             current_distance = distances.slice(0, 19).reduce((acc, current) => acc + current, 0);
         }
         
-        document.getElementById("distance_covered").innerHTML = current_distance/1000 + " km"
-        document.getElementById("distance_todo").innerHTML = 205 - (current_distance/1000) + " km"
+        document.getElementById("distance_covered").innerHTML = Math.floor(current_distance/1000) + " km"
+        document.getElementById("distance_todo").innerHTML = Math.floor(205 - (current_distance/1000)) + " km"
 
         var percentage = ((current_distance/1000) / 205.23) * 100
 
