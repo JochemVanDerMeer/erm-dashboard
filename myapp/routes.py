@@ -37,8 +37,11 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def mainpage():
     stage = RowStage.query.all()
-    stage = stage[0]
-    return render_template("./index.html", stage=stage )
+    if stage:
+        stage = stage[0]
+        return render_template("./index.html", stage=stage )
+    else:
+        return render_template("./waiting.html")
 
 @main.route('/current_stages')
 def index():
