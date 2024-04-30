@@ -10,8 +10,12 @@ main = Blueprint('main', __name__)
 def mainpage():
     stage = RowStage.query.all()
     if stage:
-        stage = stage[0]
-        return render_template("./index.html", stage=stage )
+        if int(stage[0].stage_number) > 20:
+            stage = stage[0]
+            return render_template("./finished.html", stage=stage)
+        else:
+            stage = stage[0]
+            return render_template("./index.html", stage=stage )
     else:
         return render_template("./waiting.html")
 
