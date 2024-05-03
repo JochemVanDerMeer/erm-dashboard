@@ -23,7 +23,7 @@ def mainpage():
 def index():
     users = RowStage.query.all()
     users_list_html = [f"<li>{ user.stage_number }</li>" for user in users]
-    return f"<ul>{''.join(users_list_html)}</ul>"
+    return f"<h3>Etappes beschikbaar:</h3><ul>{''.join(users_list_html)}</ul>"
 
 @main.route('/add/<stage_number>/<start>/<finish>/<distance>/<cox>/<stroke>/<bow>/<next_cox>/<next_stroke>/<next_bow>')
 def add_stage(stage_number, start, finish, distance, cox, stroke, bow, next_cox, next_stroke, next_bow):

@@ -170,15 +170,15 @@
 
     <script>
 
-        var distances = [0, 12800, 11000, 10900, 12550, 12500, 7500, 9700, 11200, 11350, 11100, 8000, 8300, 10125, 11700, 10500, 8400, 9100, 10000, 10000, 8500]
+        var distances = [12800, 11000, 10900, 12550, 12500, 7500, 9700, 11200, 11350, 11100, 8000, 8300, 10125, 11700, 10500, 8400, 9100, 10000, 10000, 8500]
         var current_distance = 0
         var current_stage = parseInt("{{stage.stage_number}}")
 
         if ((current_stage) == 0) {
-            current_distance = distances[0]
+            current_distance = 0
         }
         else if ((current_stage) == 1) {
-            current_distance = distances[0]
+            current_distance = 0
         }
         else if ((current_stage == 2)) {
             current_distance= distances.slice(0, 1).reduce((acc, current) => acc + current, 0);
