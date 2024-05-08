@@ -40,7 +40,8 @@ def mainpage():
 @main.route('/current_stages')
 def index():
     users = RowStage.query.all()
-    users_list_html = [f"<li>{ user.stage_number }</li>" for user in users]
+    sorted_users = sorted(users, key=lambda x: int(x.stage_number))
+    users_list_html = [f"<li>{ user.stage_number }</li>" for user in sorted_users]
     #return f"<h3>Etappes beschikbaar:</h3><ul>{''.join(users_list_html)}</ul>"
     return f"<p>Klik <a href='/'>hier</a> om terug te gaan naar het dashboard.</p><h3>Etappes beschikbaar:</h3><ul>{''.join(users_list_html)}</ul>"
 
@@ -67,7 +68,7 @@ def next_stage():
     to_delete = RowStage.query.filter_by(stage_number = stage.stage_number).first()
     db.session.delete(to_delete)
     db.session.commit()
-    return redirect(url_for("main.index"))
+    return redirect(url_for("main.mainpage"))
 
 @main.route('/status')
 @auth.login_required
