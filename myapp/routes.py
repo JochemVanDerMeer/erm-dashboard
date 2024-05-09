@@ -26,7 +26,7 @@ def verify_password(username, password):
 def mainpage():
     stage = RowStage.query.all()
     if stage:
-        if int(stage[0].stage_number) > 20:
+        if int(stage[0].stage_number) == 21:
             stage = stage[0]
             return render_template("./finished.html", stage=stage)
         else:

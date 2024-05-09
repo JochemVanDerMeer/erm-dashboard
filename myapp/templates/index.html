@@ -40,7 +40,7 @@
             margin-top: 5px;
             font-weight: bold;
             font-size: 18px;
-            color: #333;
+            color: black;
             text-transform: uppercase;
         }
         .stage-info {
@@ -48,14 +48,14 @@
             margin-top: 20px;
             margin-bottom: 20px;
             font-size: 16px;
-            color: #666;
+            color: black;
         }
         .deadline {
             text-align: center;
             margin-top: 20px;
             margin-bottom: 20px;
             font-size: 16px;
-            color: #666;
+            color: black;
         }
         .btn-container {
             text-align: center;
@@ -74,7 +74,7 @@
         .btn:hover {
             background-color: #0056b3;
         }
-        .countdown-container {
+        /*.countdown-container {
             text-align: center;
             margin-bottom: 20px;
             font-size: 16px;
@@ -85,7 +85,7 @@
         }
         .countdown {
             display: inline-block;
-        }
+        } */
         .image-container {
             text-align: center; /* Center-align the content */
         }
@@ -106,7 +106,30 @@
         text-align: center;
         line-height: 30px;
         color: white;
+        } 
+        .countdown-container {
+    margin-bottom: 10px; /* Add margin between each set of divs */
 }
+
+.countdown-text,
+.countdown {
+    display: block; /* Make elements block-level */
+    margin-bottom: 10px; /* Add margin between elements */
+    text-align: center; /* Center text within the divs */
+}
+
+.info {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+}
+
+.current_progress {
+    color: black;
+}
+
+
     </style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -156,24 +179,28 @@
             </div>
         </div>
 
-        <div class="countdown-container">
+<div class="info">
+    <div class="countdown-container">
             <div class="countdown-text"><b>Tijd over:</b></div>
             <div class="countdown" id="countdown"></div>
         </div>
-
         <div class="countdown-container">
-            <div class="countdown-text"><b>Afstand geroeid:</b></div>
-            <div class="countdown" id="distance_covered"> </div>
+            <div class="countdown-text"><b>Tijd sinds start:</b></div>
+            <div class="countdown" id="timer"></div>
         </div>
-
-        <div class="countdown-container">
             <div class="countdown-text"><b>Afstand te gaan:</b></div>
-            <div class="countdown" id="distance_todo"> </div>
+            <div class="countdown" id="distance_todo"></div>
         </div>
+        
+ 
+
+
 
         <div class="progress-container">
-            <div class="progress-bar" id="myBar"></div>
-          </div>
+            <div class="progress-bar" id="myBar"><p class="current_progress" id="current_km"></p></div>
+          </div> 
+
+
 
     </div>
 
@@ -247,8 +274,9 @@
             current_distance = distances.slice(0, 19).reduce((acc, current) => acc + current, 0);
         }
         
-        document.getElementById("distance_covered").innerHTML = Math.floor(current_distance/1000) + " km"
+        //document.getElementById("distance_covered").innerHTML = Math.floor(current_distance/1000) + " km"
         document.getElementById("distance_todo").innerHTML = Math.floor(205 - (current_distance/1000)) + " km"
+        document.getElementById("current_km").innerHTML = Math.floor(current_distance/1000) + "km"
 
         var percentage = ((current_distance/1000) / 205.23) * 100
 
@@ -264,14 +292,14 @@
             var distance = countDownDate - now;
 
             // Calculate days, hours, minutes, and seconds
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            var days_f = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours_f = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes_f = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds_f = Math.floor((distance % (1000 * 60)) / 1000);
 
             // Display the countdown
             // document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-            document.getElementById("countdown").innerHTML = days + "d " + hours + "u " + minutes + "m ";
+            document.getElementById("countdown").innerHTML = days_f + "d " + hours_f + "u " + minutes_f + "m ";
 
             // If the countdown is over, display a message
             if (distance < 0) {
@@ -288,6 +316,37 @@
             elem.style.width = "0%";
         }
         };
+
+        
+
+
+        // Set the date and time to start counting from
+        var startDate = new Date("May 10, 2024 20:00:00").getTime();
+
+        // Update the counter every second
+        var x = setInterval(function() {
+
+        // Get the current date and time
+        var now = new Date().getTime();
+
+        // Calculate the time elapsed since the start date
+        var elapsed = now - startDate;
+
+        // Calculate days, hours, minutes, and seconds elapsed
+        var days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+
+        // Display the elapsed time
+        document.getElementById("timer").innerHTML = days + "d " + hours + "u "
+        + minutes + "m ";
+
+        }, 1000);
+
+
+
+
     </script>
 </body>
 </html>
