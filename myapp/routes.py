@@ -31,8 +31,6 @@ def mainpage():
             return render_template("./finished.html", stage=stage)
         else:
             stage = min(stage, key=lambda x: int(x.stage_number))
-            #print((int(stage[0].stage_number)))
-            #stage = stage[0]
             return render_template("./index.html", stage=stage )
     else:
         return render_template("./waiting.html")
@@ -42,7 +40,6 @@ def index():
     users = RowStage.query.all()
     sorted_users = sorted(users, key=lambda x: int(x.stage_number))
     users_list_html = [f"<li>{ user.stage_number }</li>" for user in sorted_users]
-    #return f"<h3>Etappes beschikbaar:</h3><ul>{''.join(users_list_html)}</ul>"
     return f"<p>Klik <a href='/'>hier</a> om terug te gaan naar het dashboard.</p><h3>Etappes beschikbaar:</h3><ul>{''.join(users_list_html)}</ul>"
 
 @main.route('/add/<stage_number>/<start>/<finish>/<distance>/<cox>/<stroke>/<bow>/<next_cox>/<next_stroke>/<next_bow>')
