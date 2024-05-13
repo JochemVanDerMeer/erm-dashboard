@@ -1,349 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ERM Dashboard</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f3f3f3;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .stage {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .crew {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        .cox, .bow, .stroke {
-            flex: 1;
-            text-align: center;
-        }
-        .name {
-            margin-top: 5px;
-            font-weight: bold;
-            font-size: 18px;
-            color: black;
-            text-transform: uppercase;
-        }
-        .stage-info {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            font-size: 16px;
-            color: black;
-        }
-        .deadline {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            font-size: 16px;
-            color: black;
-        }
-        .btn-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-        /*.countdown-container {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 16px;
-            color: #666;
-        }
-        .countdown-text {
-            display: inline-block;
-        }
-        .countdown {
-            display: inline-block;
-        } */
-        .image-container {
-            text-align: center; /* Center-align the content */
-        }
-        img {
-            width: 100px; /* Set width to 200 pixels */
-            height: auto; /* Maintain aspect ratio */
-            display: inline-block; /* Ensure the image behaves like an inline element */
-        }
-        .progress-container {
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f3f3f3;
+      }
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .stage {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .crew {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+      .cox,
+      .bow,
+      .stroke {
+        flex: 1;
+        text-align: center;
+      }
+      .name {
+        margin-top: 5px;
+        font-weight: bold;
+        font-size: 18px;
+        color: black;
+        text-transform: uppercase;
+      }
+      .stage-info {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        color: black;
+      }
+      .deadline {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        color: black;
+      }
+      .btn-container {
+        text-align: center;
+        margin-top: 20px;
+      }
+      .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .btn:hover {
+        background-color: #0056b3;
+      }
+      .image-container {
+        text-align: center;
+      }
+      img {
+        width: 100px;
+        height: auto;
+        display: inline-block;
+      }
+      .progress-container {
         width: 100%;
         background-color: #d7d7d7;
-        }
+      }
 
-        .progress-bar {
+      .progress-bar {
         width: 0;
         height: 30px;
         background-color: #4caf50;
         text-align: center;
         line-height: 30px;
         color: white;
-        } 
-        .countdown-container {
-    margin-bottom: 10px; /* Add margin between each set of divs */
-}
+      }
+      .countdown-container {
+        margin-bottom: 10px;
+      }
 
-.countdown-text,
-.countdown {
-    display: block; /* Make elements block-level */
-    margin-bottom: 10px; /* Add margin between elements */
-    text-align: center; /* Center text within the divs */
-}
+      .countdown-text,
+      .countdown {
+        display: block;
+        margin-bottom: 10px;
+        text-align: center;
+      }
 
-.info {
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
-}
+      .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
 
-.current_progress {
-    color: black;
-}
-
-
+      .current_progress {
+        color: black;
+      }
     </style>
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQTXCC16BX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-YQTXCC16BX"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
 
-  gtag('config', 'G-YQTXCC16BX');
-</script>
-<body>
+    gtag("config", "G-YQTXCC16BX");
+  </script>
+  <body>
     <div class="container">
-        <div class="image-container">
-            <img class=logo src="https://boegballen.nl/img/logobb.jpg" alt="Description of the image">
-        </div>
-        <h1 class="stage">Boegballen ERM</h1>
-        
-        <div class="stage-info">
-            <p><b>Huidige etappe:</b> {{ stage.stage_number }}. {{ stage.start }} -> {{ stage.finish }}</p>
-            <p><b>Afstand huidige etappe:</b> {{ stage.distance }} meter</p>
-        </div>
+      <h1 class="stage">Elfsteden Roeimarathon dashboard</h1>
 
-        <div>Huidige etappe:</div>
-        <div class="crew">
-            <div class="cox">
-                <div class="name">Stuur:</div><div> {{ stage.cox }} </div>
-            </div>
-            <div class="bow">
-                <div class="name">Slag:</div><div> {{ stage.stroke }} </div>
-            </div>
-            <div class="stroke">
-                <div class="name">Boeg:</div><div> {{ stage.bow }} </div>
-            </div>
-        </div>
+      <div class="stage-info">
+        <p>
+          <b>Huidige etappe:</b> {{ stage.stage_number }}. {{ stage.start }} ->
+          {{ stage.finish }}
+        </p>
+        <p><b>Afstand huidige etappe:</b> {{ stage.distance }} meter</p>
+      </div>
 
-        <div>Volgende etappe:</div>
-        <div class="crew">
-            <div class="cox">
-                <div class="name">Stuur:</div><div> {{ stage.next_cox }} </div>
-            </div>
-            <div class="bow">
-                <div class="name">Slag:</div><div> {{ stage.next_stroke }} </div>
-            </div>
-            <div class="stroke">
-                <div class="name">Boeg:</div><div> {{ stage.next_bow }} </div>
-            </div>
+      <div>Huidige etappe:</div>
+      <div class="crew">
+        <div class="cox">
+          <div class="name">Stuur:</div>
+          <div>{{ stage.cox }}</div>
         </div>
+        <div class="bow">
+          <div class="name">Slag:</div>
+          <div>{{ stage.stroke }}</div>
+        </div>
+        <div class="stroke">
+          <div class="name">Boeg:</div>
+          <div>{{ stage.bow }}</div>
+        </div>
+      </div>
 
-<div class="info">
-    <div class="countdown-container">
-            <div class="countdown-text"><b>Tijd over:</b></div>
-            <div class="countdown" id="countdown"></div>
+      <div>Volgende etappe:</div>
+      <div class="crew">
+        <div class="cox">
+          <div class="name">Stuur:</div>
+          <div>{{ stage.next_cox }}</div>
+        </div>
+        <div class="bow">
+          <div class="name">Slag:</div>
+          <div>{{ stage.next_stroke }}</div>
+        </div>
+        <div class="stroke">
+          <div class="name">Boeg:</div>
+          <div>{{ stage.next_bow }}</div>
+        </div>
+      </div>
+
+      <div class="info">
+        <div class="countdown-container">
+          <div class="countdown-text"><b>Tijd over:</b></div>
+          <div class="countdown" id="countdown"></div>
         </div>
         <div class="countdown-container">
-            <div class="countdown-text"><b>Tijd sinds start:</b></div>
-            <div class="countdown" id="timer"></div>
+          <div class="countdown-text"><b>Tijd sinds start:</b></div>
+          <div class="countdown" id="timer"></div>
         </div>
-            <div class="countdown-text"><b>Afstand te gaan:</b></div>
-            <div class="countdown" id="distance_todo"></div>
+        <div class="countdown-text"><b>Afstand te gaan:</b></div>
+        <div class="countdown" id="distance_todo"></div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar" id="myBar">
+          <p class="current_progress" id="current_km"></p>
         </div>
-        
- 
-
-
-
-        <div class="progress-container">
-            <div class="progress-bar" id="myBar"><p class="current_progress" id="current_km"></p></div>
-          </div> 
-
-
-
+      </div>
     </div>
 
     <script>
+      var distances = [
+        12800, 11000, 10900, 12550, 12500, 7500, 9700, 11200, 11350, 11100,
+        8000, 8300, 10125, 11700, 10500, 8400, 9100, 10000, 10000, 8500,
+      ];
+      var current_distance = 0;
+      var current_stage = parseInt("{{stage.stage_number}}");
 
-        var distances = [12800, 11000, 10900, 12550, 12500, 7500, 9700, 11200, 11350, 11100, 8000, 8300, 10125, 11700, 10500, 8400, 9100, 10000, 10000, 8500]
-        var current_distance = 0
-        var current_stage = parseInt("{{stage.stage_number}}")
+      if (current_stage >= 0 && current_stage <= 20) {
+        current_distance = distances
+          .slice(0, current_stage)
+          .reduce((acc, current) => acc + current, 0);
+      }
 
-        if ((current_stage) == 0) {
-            current_distance = 0
-        }
-        else if ((current_stage) == 1) {
-            current_distance = 0
-        }
-        else if ((current_stage == 2)) {
-            current_distance= distances.slice(0, 1).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 3)) {
-            current_distance = distances.slice(0, 2).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 4)) {
-            current_distance = distances.slice(0, 3).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 5)) {
-            current_distance = distances.slice(0, 4).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 6)) {
-            current_distance = distances.slice(0, 5).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 7)) {
-            current_distance = distances.slice(0, 6).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 8)) {
-            current_distance = distances.slice(0, 7).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 9)) {
-            current_distance = distances.slice(0, 8).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 10)) {
-            current_distance = distances.slice(0, 9).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 11)) {
-            current_distance = distances.slice(0, 10).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 12)) {
-            current_distance = distances.slice(0, 11).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 13)) {
-            current_distance = distances.slice(0, 12).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 14)) {
-            current_distance = distances.slice(0, 13).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 15)) {
-            current_distance = distances.slice(0, 14).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 16)) {
-            current_distance = distances.slice(0, 15).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 17)) {
-            current_distance = distances.slice(0, 16).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 18)) {
-            current_distance = distances.slice(0, 17).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 19)) {
-            current_distance = distances.slice(0, 18).reduce((acc, current) => acc + current, 0);
-        }
-        else if ((current_stage == 20)) {
-            current_distance = distances.slice(0, 19).reduce((acc, current) => acc + current, 0);
-        }
-        
-        //document.getElementById("distance_covered").innerHTML = Math.floor(current_distance/1000) + " km"
-        document.getElementById("distance_todo").innerHTML = Math.floor(205 - (current_distance/1000)) + " km"
-        document.getElementById("current_km").innerHTML = Math.floor(current_distance/1000) + "km"
+      document.getElementById("distance_todo").innerHTML =
+        Math.floor(205 - current_distance / 1000) + " km";
+      document.getElementById("current_km").innerHTML =
+        Math.floor(current_distance / 1000) + "km";
 
-        var percentage = ((current_distance/1000) / 205.23) * 100
+      var percentage = (current_distance / 1000 / 205.23) * 100;
 
-        // Set the date and time for May 11th, 2024, 20:00:00
-        var countDownDate = new Date("May 11, 2024 20:00:00").getTime();
+      var countDownDate = new Date("May 11, 2024 20:00:00").getTime();
 
-        // Update the countdown every second
-        var x = setInterval(function() {
-            // Get the current date and time
-            var now = new Date().getTime();
-
-            // Calculate the distance between now and the countdown date
-            var distance = countDownDate - now;
-
-            // Calculate days, hours, minutes, and seconds
-            var days_f = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours_f = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes_f = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds_f = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Display the countdown
-            // document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-            document.getElementById("countdown").innerHTML = hours_f + "u " + minutes_f + "m ";
-
-            // If the countdown is over, display a message
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "EXPIRED";
-            } else if (days_f >= 1) {
-                document.getElementById("countdown").innerHTML = "ERM nog niet begonnen";
-            }
-        }, 1000);
-
-        window.onload = function() {
-        var elem = document.getElementById("myBar");
-        if (percentage >= 0 && percentage <= 100) {
-            elem.style.width = percentage + "%";
-        } else {
-            elem.style.width = "0%";
-        }
-        };
-
-        // Set the date and time to start counting from May 10
-        var startDate = new Date("May 10, 2024 20:00:00").getTime();
-
-        // Update the counter every second
-        var x = setInterval(function() {
-
-        // Get the current date and time
+      var x = setInterval(function () {
         var now = new Date().getTime();
 
-        // Calculate the time elapsed since the start date
-        var elapsed = now - startDate;
+        var distance = countDownDate - now;
 
-        // Calculate days, hours, minutes, and seconds elapsed
+        var days_f = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours_f = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        var minutes_f = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds_f = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML =
+          hours_f + "u " + minutes_f + "m ";
+
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("countdown").innerHTML = "ERM afgelopen";
+        } else if (days_f >= 1) {
+          document.getElementById("countdown").innerHTML =
+            "ERM nog niet begonnen";
+        }
+      }, 1000);
+
+      window.onload = function () {
+        var elem = document.getElementById("myBar");
+        if (percentage >= 0 && percentage <= 100) {
+          elem.style.width = percentage + "%";
+        } else {
+          elem.style.width = "0%";
+        }
+      };
+
+      var startDate = new Date("May 10, 2024 20:00:00").getTime();
+
+      var x = setInterval(function () {
+        var now = new Date().getTime();
+        var elapsed = now - startDate;
         var days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var hours = Math.floor(
+          (elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
         var minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
 
         if (elapsed <= 0) {
-            document.getElementById("timer").innerHTML = "ERM nog niet begonnen"
-        } else {
-        // Display the elapsed time
-        document.getElementById("timer").innerHTML = hours + "u " + minutes + "m "; }
-    
-    }, 1000);
+          document.getElementById("timer").innerHTML = "ERM nog niet begonnen";
+        } 
+        else if (days >= 1) {
+            document.getElementById("timer").innerHTML = "ERM afgelopen";
+        }
+        else {
+          document.getElementById("timer").innerHTML =
+            hours + "u " + minutes + "m ";
+        }
+      }, 1000);
     </script>
-</body>
+  </body>
 </html>
